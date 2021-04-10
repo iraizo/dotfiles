@@ -1,0 +1,4 @@
+[submodule "configs/polybar-themes"]
+	path = configs/polybar-themes
+	url = https://github.com/adi1090x/polybar-themes
+	branch = master

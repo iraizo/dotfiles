@@ -1,0 +1,10 @@
+[Unit]
+Description=Takes battle data from the SplatNet 2 app and uploads it to stat.ink. 
+[Service]
+ExecStart=/usr/bin/python splatnet2statink.py -M 150
+WorkingDirectory=/opt/splatnet2statink
+Restart=5s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
