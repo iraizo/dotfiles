@@ -10,3 +10,4 @@ I do not recommend trying to install those because they are made for me personal
 - polybar
 - i3 
 - pipewire
+- neovim
