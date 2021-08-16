@@ -1,0 +1,8 @@
+{
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.enableMessage": "never",
+  "coc.preferences.semanticTokensHighlights": false,
+  "clangd.semanticHighlighting": true
+}
+
