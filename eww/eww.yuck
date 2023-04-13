@@ -1,0 +1,281 @@
+;;The Bar widget, which fills the bar window and houses all content
+;;----------------------------------------------------------------
+(defwidget bar []
+  (centerbox
+    :orientation "h"
+    (bars)
+    (music)
+    (timedate)
+  )
+)
+
+;;Time/date widget creation
+;;----------------------------------------------------------------
+(defwidget timedate []
+  (button
+    :class "timedate"
+    :orientation "h"
+    :halign "end"
+
+    time
+  )
+)
+
+;;Widget for the RAM, Volume bars
+;;----------------------------------------------------------------
+(defwidget bars []
+  (box
+    :onclick "eww open calendar"
+
+    :class "bars"
+    :orientation "h"
+    :space-evenly false
+    :halign "start"
+    ;;commented out bc it's broken
+    (metric
+      :label ""
+      :value {EWW_CPU.avg}
+      :onchange ""
+    )
+    ;;Ram Usage
+    (metric
+      :label ""
+      :value {EWW_RAM.used_mem_perc}
+      :onchange ""
+    )
+ (box
+    :orientation "h"
+    :class "metric"
+    :space-evenly false
+    (box
+      :class "label"
+      "🔊"
+    )
+    (scale
+      :min 0
+      :max 100
+      :active true
+      :value volume
+      :onchange "eww update volume={} & amixer -D pulse sset Master {}% / 100"
+    )
+  )
+    ;;Battery
+    ;;(metric
+      ;;:label "⚡"
+      ;;:value {EWW_BATTERY.BAT0.capacity}
+      ;;:onchange ""
+    )
+    ;;Commented out bc broken
+;;    (metric
+;;     :label "💾"
+;;     :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+;;     :onchange ""
+;;      )
+  )
+
+
+;;Commented out because it's broken
+;;(defwidget workspaces []
+;;  (box
+;;    :class "workspaces"
+;;    :orientation "h"
+;;    :space-evenly true
+;;    :halign "start"
+;;    :spacing 10
+;;    (button :onclick "wmctrl -s 0" 1)
+;;    (button :onclick "wmctrl -s 1" 2)
+;;    (button :onclick "wmctrl -s 2" 3)
+;;    (button :onclick "wmctrl -s 3" 4)
+;;    (button :onclick "wmctrl -s 4" 5)
+;;    (button :onclick "wmctrl -s 5" 6)
+;;    (button :onclick "wmctrl -s 6" 7)
+;;    (button :onclick "wmctrl -s 7" 8)
+;;    (button :onclick "wmctrl -s 8" 9)
+;;  )
+;;)
+
+;;Widget that gives the music title 
+;;----------------------------------------------------------------
+(defwidget music []
+  (button
+    :class "music"
+    :orientation "h"
+    :space-evenly false
+    :halign "center"
+    :onclick "eww open --toggle mediactrl"
+    {music != "" ? "${music}" : ""} ;;🎵 
+  )
+)
+
+;;Base widget creation/setup for RAM/Volume bars
+;;----------------------------------------------------------------
+(defwidget metric [label value onchange]
+  (box
+    :orientation "h"
+    :class "metric"
+    :space-evenly false
+    (box
+      :class "label"
+      label
+    )
+    (scale
+      :min 0
+      :max 100
+      :active {onchange != ""}
+      :value value
+      :onchange onchange
+    )
+  )
+)
+
+;;Definining variables
+;;----------------------------------------------------------------
+(deflisten music
+  :initial ""
+  "playerctl --follow metadata --format '{{ title }} - {{ artist }}' || true"
+)
+
+(defpoll volume
+  :interval ".1s"
+  "scripts/getvol"
+)
+
+(defpoll time
+  :interval "10s"
+  "date '+%H:%M  |  %A %b %d, %Y  |  %j'"
+)
+
+;;The actual bar itself, the window that houses everything
+;;----------------------------------------------------------------
+(defwindow bar
+  :monitor 1
+  :windowtype "dock"
+  :exclusive true
+  :geometry (
+    geometry
+    ;;X and Y padding from the top of the screen
+    :x "14px"
+    :y "14px"
+    ;;Width needs to be (monwidth-2x)
+    :width "2528px"
+    ;;Height can be whatever
+    :height "32px"
+    :anchor "top center"
+  )
+  (bar)
+)
+
+
+;;Music Controls panel
+;;--------------------------------------------------------------------------------------------------------------------------------
+(defvar media false)
+
+;;Windows for the media controls
+(defwindow mediactrl
+  :monitor 0
+  :windowtype "dock"
+  :exclusive false
+  :focusable false
+  :geometry (
+    geometry
+    :y "16px"
+    :width "400px"
+    :height "100px"
+    :anchor "top center"
+  )
+  (mediapanel)
+)
+
+;;Media Panel Creation
+(defwidget mediapanel []
+  (box
+    :class "mediapanel"
+    :orientation "vertical" ;;wain box in the widget window
+    ;;Track and artist, didn't like how it looked.
+    ;(label
+    ;  :class "track"
+    ;  :limit-width 20
+    ;  :text track)
+    ;(label
+    ;  :class "artist"
+    ;  :text artist)
+
+    (box ;;contains all the media controls
+      :orientation "horizontal"
+      
+      (button
+        :class "rewind"
+        :onclick "playerctl previous"
+
+      "玲")
+
+      (button
+        :class "playpause"
+        :onclick "playerctl play-pause"
+
+      "懶")
+
+      (button
+        :class "skip"
+        :onclick "playerctl next"
+      "怜") 
+    )
+  )
+)
+
+
+;;Desktop Widgets
+;;--------------------------------------------------------------------------------------------------------------------------------
+(defwindow desktop
+  :monitor 0
+  :stacking "bg"
+  :class "power"
+  :geometry (
+    geometry
+    :width "164px"
+    :height "64px"
+    :x "16px"
+    :y "16px"
+    :anchor "bottom right"
+  )
+  (desktop_container)
+)
+
+;;Container for the desktop widgets
+(defwidget desktop_container []
+  (box
+    :class "poweroptions"
+    :orientation "horizontal"
+    ;;Logout
+    (button
+      :class "logout"
+      :class "powerbuttons"
+      :onclick "loginctl terminate-user $USER"
+      ""
+    )
+
+    ;;Hibernate
+    ;;(button
+    ;;  :class "hibernate"
+    ;;  :class "powerbuttons"
+    ;;  :onclick "systemctl hibernate"
+    ;;  "⏾"
+    ;;)
+
+    ;;Restart
+    (button
+      :class "restart"
+      :class "powerbuttons"
+      :onclick "shutdown now -r"
+      "ﰇ"
+    )
+
+    ;;Shutdown
+    (button
+      :class "shutdown"
+      :class "powerbuttons"
+      :onclick "shutdown now -P"
+      "襤"
+    )
+  )
+)

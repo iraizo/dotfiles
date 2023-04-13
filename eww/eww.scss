@@ -1,0 +1,169 @@
+*{
+  all: unset; //Unsets everything so you can style everything from scratch
+  font-family: "JetBrains Mono";
+}
+
+$background: #2E3440;
+$accent: #81A1C1;
+$invisible: rgba(0,0,0,0);
+$text: #ECEFF4;
+$slider-bg: #4c566a;
+$popout-bg: #2E3440;
+
+//Global Styles
+.bar {
+  color: $text;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: "Roboto Mono";
+  background-color: $invisible;
+}
+
+.button {
+  color: $text;
+}
+
+// Styles on classes (see eww.yuck for more information)
+.timedate {
+  color: $text;
+  padding: 0px 16px;
+  border-radius: 8px;
+  background-color: $background;
+  font-weight: 600;
+}
+
+//Music box in the bar
+.music {
+  color: $text;
+  border-radius: 8px;
+  padding: 0px 16px;
+  background-color: $background;
+  font-weight: 600;
+}
+
+.music:hover {
+  color: $accent;
+}
+
+//All the slider elements(top left)
+.bars {
+  padding: 0px 16px;
+  border-radius: 8px;
+  background-color: $background;
+}
+
+/*  Does nothing as far as I can tell
+.bars slider {
+  all: unset;
+  color: $text;
+}*/
+
+//Music and Music Control settings --------------------------------------------
+//Styles for the drop down media panel
+.mediapanel {
+  color: $text;
+  padding: 16px;
+}
+
+//Rewind Button
+.rewind{
+  font-size: 300%;
+  color: $text;
+  background-color: $popout-bg;
+  border-radius: 8px;
+  margin: 0px 8px;
+}
+
+.rewind:hover {
+  color: $accent;
+}
+
+//Play/pause button
+.playpause{
+  font-size: 300%;
+  color: $text;
+  font-stretch: ultra-expanded;
+  background-color: $popout-bg;
+  border-radius: 8px;
+  margin: 0px 8px;
+}
+
+.playpause:hover {
+  color: $accent;
+}
+
+//Skip Button
+.skip{
+  font-size: 300%;
+  color: $text;
+  background-color: $popout-bg;
+  border-radius: 8px;
+  margin: 0px 8px;
+}
+
+.skip:hover {
+  color: $accent;
+}
+
+//All the Metric widget settings ----------------------------------------------
+.metric scale trough highlight {
+  all: unset;
+  background-color: $text;//#B25450;
+  color: $text;
+  border-radius: 10px;
+}
+
+.metric scale trough {
+  all: unset;
+  background-color: $slider-bg;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.metric scale trough highlight {
+  all: unset;
+  background-color: $text;
+  color: $text;
+  border-radius: 10px;
+}
+
+.metric scale trough {
+  all: unset;
+  background-color: $slider-bg;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+//Everything Desktop Left Profile Section -------------------------------------
+.power {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.powerbuttons {
+  font-size: 150%;
+  color: $text;
+  border-radius: 16px;
+}
+
+.powerbuttons:hover {
+  color: $accent;
+}
+
+//Other settings --------------------------------------------------------------
+.label-ram {
+  font-size: large;
+}
+
+.workspaces {
+    padding: 0px 10px;
+}
+
+.workspaces button:hover {
+  color: $accent;
+}
