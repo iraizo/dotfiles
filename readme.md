@@ -1,1 +1,1 @@
-not in an useable state right now, dotter is not setup you will have to use them manually
+Read to usage of the dotter [readme](https://github.com/SuperCuber/dotter) to use this.
