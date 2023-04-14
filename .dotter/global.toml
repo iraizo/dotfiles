@@ -3,10 +3,11 @@
 [default]
 depends = []
 
-[default.files]
-alacritty = ""
-dotter = ""
-eww = ""
-hypr = ""
+[alacritty.files]
+"alacritty" = "~/.config/alacritty"
 
-[default.variables]
+[eww.files]
+"eww" = "~/.config/eww"
+
+[hypr]
+"hypr" = "~/.config/hypr"
