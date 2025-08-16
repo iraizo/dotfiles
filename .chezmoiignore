@@ -1,0 +1,6 @@
+README.md
+*.txt
+
+**/helix/runtime/**
+**/aerc/accounts.conf
+**/fish/fish_variables

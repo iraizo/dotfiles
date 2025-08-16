@@ -1,0 +1,40 @@
+theme = "ashes"
+
+[editor]
+line-number = "relative"
+mouse = true
+color-modes = true
+clipboard-provider = "wayland"
+cursorline = true
+bufferline = "multiple"
+end-of-line-diagnostics = "hint"
+shell = ["zsh", "-ic"]
+auto-pairs = true
+
+[keys.normal]
+
+"ret" = "goto_word"
+
+[editor.indent-guides]
+character = "╎"
+render = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
+
+
+[editor.lsp]
+display-inlay-hints = true
+inlay-hints-length-limit = 64
+display-progress-messages = true
+auto-signature-help = false
+display-messages = true
+
+[editor.inline-diagnostics]
+other-lines = "hint"
+cursor-line = "disable"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"

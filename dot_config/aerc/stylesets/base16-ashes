@@ -1,0 +1,67 @@
+# Base16 Ashes theme for aerc
+# Author: Jannik Siebert (https://github.com/janniks)
+
+*.default=true
+*.normal=true
+
+# Default text colors
+default.fg=#C7CCD1
+default.bg=#1C2023
+
+# Error, warning, and success messages
+error.fg=#C79595
+warning.fg=#C7C795
+success.fg=#AEC795
+
+# Tabs
+tab.fg=#747C84
+tab.bg=#393F45
+tab.selected.fg=#C7CCD1
+tab.selected.bg=#565E65
+tab.selected.bold=true
+
+# Borders
+border.fg=#565E65
+border.bold=true
+
+# Message list styles
+msglist_unread.bold=true
+msglist_flagged.fg=#C7C795 # base09 yellow
+msglist_flagged.bold=true
+msglist_result.fg=#AE95C7 # base0D purple
+msglist_result.bold=true
+msglist_*.selected.bold=true
+msglist_*.selected.bg=#565E65
+
+# Directory list styles
+dirlist_*.selected.bold=true
+dirlist_*.selected.bg=#565E65
+
+# Status line
+statusline_default.fg=#ADB3BA
+statusline_default.bg=#565E65
+statusline_error.bold=true
+statusline_success.bold=true
+
+# Selector and completion
+selector_focused.bg=#565E65
+completion_default.selected.bg=#565E65
+
+[viewer]
+# Viewer styles
+url.fg=#95AEC7 # base0C aqua
+url.underline=true
+header.bold=true
+signature.dim=true
+
+# Diff styles
+diff_meta.bold=true
+diff_chunk.fg=#AE95C7 # base0D purple
+diff_chunk_func.fg=#AE95C7 # base0D purple
+diff_chunk_func.bold=true
+diff_add.fg=#AEC795 # base0A poison green
+diff_del.fg=#C79595 # base0F light red
+
+# Quote styles
+quote_*.fg=#747C84
+quote_1.fg=#ADB3BA

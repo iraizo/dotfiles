@@ -1,0 +1,23 @@
+
+[[language]]
+name = "rust"
+auto-format = true
+
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+
+[[language]]
+name = "fish"
+language-servers = [ "fish-lsp" ]
+
+[language-server.fish-lsp]
+command = "fish-lsp"
+args= ["start"]
+environment = { "fish_lsp_show_client_popups" = "false" }
+
+[language-server.typescript-lsp]
+command = "bunx --bun typescript-language-server --stdio"
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server"]
