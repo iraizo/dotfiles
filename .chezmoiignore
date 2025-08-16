@@ -2,5 +2,12 @@ README.md
 *.txt
 
 **/helix/runtime/**
+**/alacritty/themes/*
+!**/alacritty/themes/themes/
+
 **/aerc/accounts.conf
 **/fish/fish_variables
+
+**/.git/
+**/.git/**
+**/.gitignore

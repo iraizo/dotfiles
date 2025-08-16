@@ -1,0 +1,15 @@
+Configuration files for my main desktop (arch linux)
+
+Includes:
+	- alacritty | terminal emulator
+	- helix | text editor / IDE
+	- fish | shell
+	- wireplumber | audio
+	- zellij | terminal workspaces
+	- hypr | window manager and its utilities
+	- hyprpanel | status bar
+	- aerc | email client
+
+Install via
+
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply iraizo
