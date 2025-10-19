@@ -8,7 +8,7 @@ clipboard-provider = "wayland"
 cursorline = true
 bufferline = "multiple"
 end-of-line-diagnostics = "hint"
-shell = ["zsh", "-ic"]
+shell = ["fish", "-ic"]
 auto-pairs = true
 
 [keys.normal]

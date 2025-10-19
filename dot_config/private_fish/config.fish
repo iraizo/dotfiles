@@ -20,3 +20,6 @@ end
 #         kill $fish_pid
 #     end
 # end
+
+# uv
+fish_add_path "/home/raizo/.local/bin"
