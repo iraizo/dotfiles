@@ -1,3 +1,4 @@
+<pre>
 dotfiles for my main desktop (Arch Linux).
 
 Includes:\
@@ -17,7 +18,5 @@ bat - pager theme / cat alternative
 btop - process monitor
 
 Install via:
-
-```sh
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply iraizo
-```
+</pre>
