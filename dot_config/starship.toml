@@ -1,0 +1,99 @@
+add_newline = false
+format = """$python$directory$character"""
+right_format = """$status$cmd_duration${custom.jj}$git_branch${custom.git_status_dirty}$git_status${custom.vi_normal}${custom.vi_insert}${custom.vi_replace}${custom.vi_visual}"""
+
+# Set the active palette to ashen
+palette = "ashen"
+
+[palettes.ashen]
+black = '#121212'
+red = '#B14242'
+orange = '#D87C4A'
+yellow = '#E49A44'
+blue = '#4A8B8B'
+purple = '#a7a7a7'
+cyan = '#b4b4b4'
+white = '#d5d5d5'
+bright_black = '#949494'
+
+[character]
+# Using red for the primary prompt character
+success_symbol = "[󰘧](white)"
+error_symbol = "[󰘧](yellow)"
+vicmd_symbol = "[󰘧](white)"
+
+[python]
+format = '[(\($virtualenv\) )]($style)'
+style = 'bright_black'
+
+[directory]
+# Setting directory text to red to match your request
+style = "red"
+truncation_length = 1
+truncation_symbol = ""
+fish_style_pwd_dir_length = 1
+
+[git_branch]
+format = ' [$branch]($style)'
+style = "orange"
+
+[git_status]
+format = '( [\[$ahead_behind$stashed\]]($style))'
+style = "cyan"
+stashed = "≡"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+
+[custom.git_status_dirty]
+when = 'test -n "$(git status --porcelain 2>/dev/null)"'
+symbol = "•"
+style = "white"
+format="[$symbol]($style)"
+shell = ["sh"]
+
+[cmd_duration]
+format = ' [$duration]($style)'
+style = "bright_black"
+
+[line_break]
+disabled = true
+
+[status]
+disabled = false
+symbol = ' ✘'
+
+[custom.vi_normal]
+when = '[ "$FISH_BIND_MODE" = "default" ]'
+symbol = "\\[N\\]"
+style = "bold red"
+format = " [$symbol]($style)"
+shell = ["sh"]
+
+[custom.vi_insert]
+when = '[ "$FISH_BIND_MODE" = "insert" ]'
+symbol = "\\[I\\]"
+style = "bold green"
+format = " [$symbol]($style)"
+shell = ["sh"]
+
+[custom.vi_replace]
+when = '[ "$FISH_BIND_MODE" = "replace_one" ] || [ "$FISH_BIND_MODE" = "replace" ]'
+symbol = "\\[R\\]"
+style = "bold cyan"
+format = " [$symbol]($style)"
+shell = ["sh"]
+
+[custom.vi_visual]
+when = '[ "$FISH_BIND_MODE" = "visual" ]'
+symbol = "\\[V\\]"
+style = "bold magenta"
+format = " [$symbol]($style)"
+shell = ["sh"]
+
+[custom.jj]
+command = "prompt"
+format = "$output"
+ignore_timeout = true
+shell = ["starship-jj", "--ignore-working-copy", "starship"]
+use_stdin = false
+when = true

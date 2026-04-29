@@ -29,13 +29,13 @@
 "diff.minus" = { fg = "#78a9ff", bg = "#393939" }
 "diff.delta" = { fg = "#dde1e6", bg = "#262626" }
 
-"ui.background" = { fg= "#ffffff", bg = "#161616"}
+"ui.background" = { }
 "ui.separator" = "#161616"
 "ui.selection" = { bg = "#393939"}
 "ui.text" = { fg = "#ffffff" }
 "ui.cursor" = { fg = "#161616", bg = "#dde1e6" }
 "ui.cursor.normal" = { fg = "#dde1e6", bg = "#161616" }
-"ui.linenr" = { fg = "#525252", bg = "#161616" }
+"ui.linenr" = { fg = "#525252" }
 "ui.linenr.selected" = { fg = "#dde1e6" }
 "ui.statusline" = { fg = "#ffffff", bg = "#161616" }
 "ui.statusline.inactive" = { fg = "#525252"}

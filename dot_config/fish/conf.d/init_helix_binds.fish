@@ -1,0 +1,1 @@
+fish_helix_key_bindings

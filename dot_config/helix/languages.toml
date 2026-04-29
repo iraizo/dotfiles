@@ -1,10 +1,36 @@
 
 [[language]]
+name = "git-config"
+# scope = "source.git-conf"
+file-types = ["conf"]
+
+[[language]]
 name = "rust"
 auto-format = true
 
+roots = [
+  "Cargo.toml",
+  "Cargo.lock"
+]
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
 [language-server.rust-analyzer.config]
 check.command = "clippy"
+inlayHints.bindingModeHints.enable = false
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureReturnTypeHints.enable = "with_block"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
 
 [[language]]
 name = "fish"
@@ -18,11 +44,141 @@ environment = { "fish_lsp_show_client_popups" = "false" }
 [language-server.typescript-lsp]
 command = "bunx --bun typescript-language-server --stdio"
 
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+[language-server.oxlint-lsp]
+command = "oxlint"
+args = ["--lsp"]
+
+[[language]]
+name = "html"
+language-servers = [ "superhtml", "tailwindcss-ls"]
+formatter = { command = "superhtml", args = ["fmt", "--stdin"] }
+auto-format = true
+
+[[language]]
+name = "css"
+language-servers = [ "vscode-css-language-server", "tailwindcss-ls"]
+formatter = { command = "oxfmt", args = ["--stdin-filepath=pluh.css"] }
+auto-format = true
+
 [[language]]
 name = "typescript"
-language-servers = ["typescript-language-server"]
+language-servers = ["typescript-language-server", "oxlint-lsp"]
+formatter = { command = "oxfmt", args = ["--stdin-filepath", "pluh.ts"] }
+auto-format = true
+
+[[language]]
+name = "markdown"
+language-servers = ["markdown-oxide", "mpls"]
+formatter = { command = "dprint", args = [ "fmt", "--stdin", "markdown" ] }
+auto-format = true
+
+[language-server.mpls]
+command = "mpls"
+args = ["--theme", "tokyonight", "--enable-emoji", "--browser", "firefox-developer-edition"]
+# [language-server.scls]
+# command = "simple-completion-language-server"
+
+# [language-server.scls.config]
+# max_completion_items = 100           # set max completion results len for each group: words, snippets, unicode-input
+# feature_words = true                 # enable completion by word
+# feature_snippets = true              # enable snippets
+# snippets_first = true                # completions will return before snippets by default
+# snippets_inline_by_word_tail = false # suggest snippets by WORD tail, for example text `xsq|` become `x^2|` when snippet `sq` has body `^2`
+# feature_unicode_input = false        # enable "unicode input"
+# feature_paths = false                # enable path completion
+# feature_citations = false            # enable citation completion (only on `citation` feature enabled)
+
+# write logs to /tmp/completion.log
+# [language-server.scls.environment]
+# RUST_LOG = "info,simple-completion-language-server=info"
+# LOG_FILE = "/tmp/completion.log"
+
+[[language]]
+name = "julia"
+scope = "source.julia"
+injection-regex = "julia"
+file-types = ["jl"]
+roots = ["Project.toml", "Manifest.toml", "JuliaProject.toml"]
+comment-token = "#"
+language-servers = ["julia-lsp"]
+indent = { tab-width = 4, unit = "    " }
+
+[language.formatter]
+command = "julia"
+args = [
+    "--project=@JuliaFormatter",
+    "--startup-file=no",
+    "--history-file=no",
+    "--quiet",
+    "-J/home/raizo/.julia/environments/JuliaFormatter/juliaformatter.so",
+    "--sysimage-native-code=yes",
+    "-e",
+    "using JuliaFormatter; print(format_text(read(stdin, String); Dict{Symbol,Any}(Symbol(k) => v for (k, v) in JuliaFormatter.find_config_file(realpath(\".\")))...))",
+]
+
+[language-server.julia-lsp]
+command = "julia"
+timeout = 60
+args = [
+    "--project=@LanguageServer",
+    "--startup-file=no",
+    "--history-file=no",
+    "--quiet",
+    "-J/home/raizo/.julia/environments/LanguageServer/languageserver.so",
+    "--sysimage-native-code=yes",
+    "-e",
+    """
+import Pkg
+project_path = let
+    dirname(something(
+        Base.load_path_expand((
+            p = get(ENV, "JULIA_PROJECT", nothing);
+            isnothing(p) ? nothing : isempty(p) ? nothing : p
+        )),
+        Base.current_project(pwd()),
+        Pkg.Types.Context().env.project_file,
+        Base.active_project(),
+    ))
+    end
+ls_install_path = joinpath(get(DEPOT_PATH, 1, joinpath(homedir(), ".julia")), "environments", "LanguageServer");
+pushfirst!(LOAD_PATH, ls_install_path);
+using LanguageServer;
+popfirst!(LOAD_PATH);
+depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
+symbol_server_path = joinpath(homedir(), ".cache", "helix", "julia_lsp_symbol_server")
+mkpath(symbol_server_path)
+server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path, nothing, symbol_server_path, true)
+server.runlinter = true
+run(server)
+"""]
 
 [[language]]
 name = "typst"
+language-servers = ["scls", "tinymist"]
 auto-format = true
 formatter.command = "typstyle"
+
+[language-server.tinymist]
+command = "tinymist"
+config = { exportPdf = "onType"}
+
+[language-server.lua-language-server]
+command = "lua-language-server"
+
+[language-server.lua-language-server.config.Lua.hint]
+enable = true
+
+[language-server.lua-language-server.config.Lua.workspace]
+library = [
+  "/home/raizo/.local/share/lux/tree/5.5/8c1f1582b6a8d805870cd4abff3347acca2d8c515a5a1ffdbcfe44c885f64349-wezterm-types@3.4.0-1/src",
+]
+
+[[language]]
+name = "lua"
+language-servers = ["lua-language-server"]
+auto-format = true
+formatter = { command = "stylua", args = ["--search-parent-directories", "-"] }

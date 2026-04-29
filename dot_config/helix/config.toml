@@ -1,38 +1,49 @@
-theme = "ashes"
+theme = "ashen"
 
 [editor]
 line-number = "relative"
 mouse = true
 color-modes = true
+undercurl = true
 clipboard-provider = "wayland"
 cursorline = true
 bufferline = "multiple"
 end-of-line-diagnostics = "hint"
-shell = ["fish", "-ic"]
+shell = ["zsh", "-ic"]
 auto-pairs = true
+completion-replace = true
+true-color = true
+popup-border = "all"
+jump-label-alphabet = "arstgmneio"
 
 [keys.normal]
 
 "ret" = "goto_word"
 
 [editor.indent-guides]
-character = "╎"
+# character = "╎"
 render = true
+skip-levels = 1
+
+[editor.soft-wrap]
+enable = true
 
 [editor.statusline]
-left = ["mode", "spinner", "version-control", "file-name"]
-
+left = ["mode", "spinner", "read-only-indicator", "file-name"]
+center = ["version-control"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "|"
 
 [editor.lsp]
 display-inlay-hints = true
-inlay-hints-length-limit = 64
+inlay-hints-length-limit = 32
 display-progress-messages = true
-auto-signature-help = false
+auto-signature-help = true
 display-messages = true
 
 [editor.inline-diagnostics]
-other-lines = "hint"
-cursor-line = "disable"
+other-lines = "error"
+cursor-line = "hint"
 
 [editor.cursor-shape]
 insert = "bar"

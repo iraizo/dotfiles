@@ -1,0 +1,14 @@
+[[snippets]]
+prefix = "assignment"
+body = """
+  #import "@preview/sheetstorm:0.3.3"
+
+  #show: sheetstorm.setup.with(
+    course: smallcaps[Kurs],
+    title: "Hausarbeit x",
+    authors: (
+     (name: "raizo")
+    ),
+)
+"""
+description = "Assignment template"

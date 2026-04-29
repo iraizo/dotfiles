@@ -1,0 +1,199 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "git_panel": {
+    "dock": "left"
+  },
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  "ssh_connections": [
+    {
+      "host": "root",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/home/raizo/hrttime"],
+        },
+      ],
+    },
+  ],
+  "show_signature_help_after_edits": true,
+  "auto_signature_help": true,
+  "inlay_hints": {
+    "enabled": true,
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry",
+    },
+    "factory-droid": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "helix_mode": false,
+  "language_models": {
+    "openai_compatible": {
+      "llama.cpp": {
+        "api_url": "http://127.0.0.1:8001/v1",
+        "available_models": [
+          {
+            "name": "unsloth/Nemotron-3-Nano-30B-A3B",
+            "max_tokens": 128000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+            },
+          },
+        ],
+      },
+    },
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "agent": {
+    "dock": "right",
+    "default_profile": "write",
+    "default_model": {
+      "effort": "high",
+      "provider": "copilot_chat",
+      "model": "gpt-5.3-codex",
+    },
+    "model_parameters": [],
+  },
+  "context_servers": {
+    "binary_ninja_mcp": {
+      "enabled": false,
+      "command": "/home/raizo/.binaryninja/repositories/community/plugins/fosdickio_binary_ninja_mcp/.venv/bin/python3",
+      "args": [
+        "/home/raizo/.binaryninja/repositories/community/plugins/fosdickio_binary_ninja_mcp/bridge/binja_mcp_bridge.py",
+      ],
+    },
+  },
+  "icon_theme": "JetBrains New UI Icons (Dark)",
+  "terminal": {
+    "font_size": 16.0,
+    "font_family": "Iosevka Nerd Font Mono",
+  },
+  "base_keymap": "VSCode",
+  "buffer_font_family": "Iosevka Nerd Font Mono",
+  //"ui_font_size": 16,
+  //"buffer_font_size": 14.0,
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light",
+    "dark": "Ashen",
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "scrollbar": {
+    "show": "never",
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 150,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null,
+    },
+  },
+  "tab_bar": {
+    "show": true,
+  },
+  "lsp": {
+    "clangd": {
+      "binary": {
+        "path": "/usr/bin/clangd",
+        "arguments": [
+          "--background-index",
+          "--compile-commands-dir=$ZED_WORKTREE_ROOT/build",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--pretty",
+          "--enable-config",
+          "--log=error",
+          // "--header-insertion=never",
+          // "--header-insertion-decorators=0",
+        ],
+      },
+    },
+    "nixd": {
+      "settings": {
+        "diagnostic": {
+          "suppress": ["sema-extra-with"],
+        },
+      },
+    },
+    "nil": {
+      "settings": {
+        "diagnostics": {
+          "ignored": ["unused_binding"],
+        },
+      },
+    },
+    "dprint": {
+      "binary": {
+        "path": "/usr/bin/dprint",
+        "arguments": ["lsp"],
+      },
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "diagnostics": {
+          "experimental": {
+            "enable": true,
+          },
+        },
+        "check": {
+          "command": "clippy",
+        },
+        "inlayHints": {
+          "maxLength": null,
+          "lifetimeElisionHints": {
+            "enable": "skip_trivial",
+            "useParameterNames": true,
+          },
+          "closureReturnTypeHints": {
+            "enable": "always",
+          },
+        },
+      },
+    },
+  },
+  // Move all panel to the right
+  "project_panel": {
+    "button": true,
+    "dock": "right",
+    "git_status": true,
+  },
+  "outline_panel": {
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  // Move some unnecessary panels to the left
+  "notification_panel": {
+    "dock": "left",
+  },
+}
